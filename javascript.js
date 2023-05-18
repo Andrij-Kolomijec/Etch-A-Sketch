@@ -10,11 +10,19 @@ for (let i = 0; i < 16; i++) {
     div.appendChild(divI);
 }
 
-// Create mouse hover event and change color
+// Mouse hover event and change color
 div.addEventListener("mouseover", e => changeColor(e.target));
 
 function changeColor(tar) {
     tar.style.background = "blue";
 }
 
-
+// Button to change the grid
+let squares = 16;
+const button = document.querySelector("button");
+button.addEventListener("click", () => {
+    squares = Number(prompt("Change the number of squares per side (up to 100):", 16));
+    while (isNaN(squares) || squares > 100 || squares < 1) {
+        squares = Number(prompt("Must be a number from 1 to 100!", 16));
+    }
+})
