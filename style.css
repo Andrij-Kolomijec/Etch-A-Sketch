@@ -1,0 +1,19 @@
+div {
+    display: flex;
+    background-color: green;
+    flex: none;
+    height: 10px;
+    width: 10px;
+}
+
+#inside {
+    border: 1px solid black;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 160px;
+    width: 160px;
+}
