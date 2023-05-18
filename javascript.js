@@ -25,4 +25,6 @@ button.addEventListener("click", () => {
     while (isNaN(squares) || squares > 100 || squares < 1) {
         squares = Number(prompt("Must be a number from 1 to 100!", 16));
     }
-})
+    div.style.height
+});
+
