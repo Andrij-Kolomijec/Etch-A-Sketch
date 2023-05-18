@@ -15,8 +15,8 @@ div {
 }
 
 .inside {
-    /* border: 1px solid black; */
-    /* margin: -1px; */
+    border: 1px solid black;
+    margin: -1px;
 }
 
 #container {
@@ -26,6 +26,8 @@ div {
     margin: 30px;
     height: 480px;
     width: 480px;
+    /* border: 2px dashed pink; */
+    /* padding: 20px; */
 }
 
 button {
