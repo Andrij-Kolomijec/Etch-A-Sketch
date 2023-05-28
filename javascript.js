@@ -21,11 +21,11 @@ function generateGrid(number) {
 generateGrid(squares);
 
 // Mouse hover event and change color
-container.addEventListener("mouseover", e => e.target.style.background = "blue");
+container.addEventListener("mouseover", e => e.target.style.background = "black");
 
 // Button to change the grid
-const button = document.querySelector("button");
-button.addEventListener("click", () => {
+const change = document.querySelector("#change");
+change.addEventListener("click", () => {
     let newSquares = Number(prompt("Change the number of squares per side (up to 100):", 16));
     while (isNaN(newSquares) || newSquares > 100 || newSquares < 1) {
         newSquares = Number(prompt("Must be a number from 1 to 100!", 16));
@@ -38,3 +38,24 @@ button.addEventListener("click", () => {
 function clearGrid() {
     container.innerHTML = "";
 }
+
+// Erase button
+const erase = document.querySelector("#erase");
+erase.addEventListener("click", () => {
+    clearGrid();
+    generateGrid(squares);
+    });
+
+// Choose color button
+const choose = document.querySelector("#choose");
+choose.type = "color";
+choose.addEventListener("click", () => {
+    
+    });
+
+// Rainbow button
+const rainbow = document.querySelector("#rainbow");
+rainbow.addEventListener("click", () => {
+    
+    });
+
