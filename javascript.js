@@ -21,49 +21,55 @@ function generateGrid(number) {
 generateGrid(squares);
 
 //Change the grid size with slider
+let isSliderActive = false;
 const slider = document.querySelector(".slider");
 const label = document.querySelector("label");
-slider.addEventListener("mousemove", () =>{
-    let newSquares = slider.value;
-    squares = newSquares;
-    clearGrid();
-    generateGrid(squares);
-    label.textContent = `${squares}x${squares} squares`;
-})
+slider.addEventListener("mousedown", () => isSliderActive = true);
+slider.addEventListener("mousemove", () => {
+    if (isSliderActive) {
+        let newSquares = slider.value;
+        squares = newSquares;
+        clearGrid();
+        generateGrid(squares);
+        label.textContent = `${squares}x${squares} squares`;
+        isSliderActive = false;
+        const box = document.querySelectorAll(".box");
+    }
+});
 
 // Mouse hover event and change color
 let color = "black";
 container.addEventListener("mouseover", e => e.target.style.background = color);
 
 const inputColor = document.querySelector("#inputColor");
-inputColor.addEventListener("mouseleave", () => color = inputColor.value)
+inputColor.addEventListener("mouseleave", () => {
+    let boxes = document.querySelectorAll(".box");
+    boxes.forEach((box) => {
+        box.addEventListener("mouseover",() => color = inputColor.value)
+    })
+});
+
+const rainbowColor = document.querySelector("#rainbow");
+rainbowColor.addEventListener("click", () => {
+    let boxes = document.querySelectorAll(".box");
+    boxes.forEach((box) => {
+        box.addEventListener("mouseover",() => color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`)
+    })
+});
+
+const eraser = document.querySelector("#eraser");
+eraser.addEventListener("click", () => {
+    let boxes = document.querySelectorAll(".box");
+    boxes.forEach((box) => {
+        box.addEventListener("mouseover",() => color = "white")
+    })
+});
 
 function clearGrid() {
     container.innerHTML = "";
 }
 
-// Erase button
-const erase = document.querySelector("#erase");
-erase.addEventListener("click", () => {
-    clearGrid();
-    generateGrid(squares);
-    });
-
-// Choose color button
-const choose = document.querySelector("#choose");
-choose.type = "color";
-choose.addEventListener("click", () => {
-    
-    });
-
-// Rainbow button
-const rainbow = document.querySelector("#rainbow");
-rainbow.addEventListener("click", () => {
-    
-    });
-
-
-    // NO LONGER NEEDED //
+// NO LONGER NEEDED //
 
 // Button to change the grid
 // const change = document.querySelector("#change");
