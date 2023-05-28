@@ -20,20 +20,31 @@ function generateGrid(number) {
 
 generateGrid(squares);
 
+//Change the grid size with slider
+const slider = document.querySelector(".slider");
+const label = document.querySelector("label");
+slider.addEventListener("mousemove", () =>{
+    let newSquares = slider.value;
+    squares = newSquares;
+    clearGrid();
+    generateGrid(squares);
+    label.textContent = `${squares}x${squares} squares`;
+})
+
 // Mouse hover event and change color
 container.addEventListener("mouseover", e => e.target.style.background = "black");
 
 // Button to change the grid
-const change = document.querySelector("#change");
-change.addEventListener("click", () => {
-    let newSquares = Number(prompt("Change the number of squares per side (up to 100):", 16));
-    while (isNaN(newSquares) || newSquares > 100 || newSquares < 1) {
-        newSquares = Number(prompt("Must be a number from 1 to 100!", 16));
-    }
-    squares = newSquares;
-    clearGrid();
-    generateGrid(squares);
-});
+// const change = document.querySelector("#change");
+// change.addEventListener("click", () => {
+//     let newSquares = Number(prompt("Change the number of squares per side (up to 100):", 16));
+//     while (isNaN(newSquares) || newSquares > 100 || newSquares < 1) {
+//         newSquares = Number(prompt("Must be a number from 1 to 100!", 16));
+//     }
+//     squares = newSquares;
+//     clearGrid();
+//     generateGrid(squares);
+// });
 
 function clearGrid() {
     container.innerHTML = "";

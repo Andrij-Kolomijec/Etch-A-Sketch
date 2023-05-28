@@ -1,12 +1,8 @@
 body {
     display: flex;
     flex-direction: column;
-    /* align-items: stretch; */
     justify-content: center;
-    /* margin-top: 30px; */
-    background-color: rgb(192, 192, 192);
-    border: 1px solid black;
-    /* flex-wrap: wrap; */
+    background-color: rgb(234, 240, 179);
     min-height: 98vh;
 }
 
@@ -15,34 +11,96 @@ body {
     display: flex;
     background-color: white;
     flex: none;
-    /* border: 1px solid black;
-    margin: -1px; */
 }
 
 #container {
-    /* display: flex;
-    flex-direction: column; */
-    /* background-color: yellow; */
-    /* margin: 30px; */
-    /* height: 480px;
-    width: 480px; */
-    /* align-self: center; */
+    border: 5px solid rgb(88, 88, 88);
+    border-radius: 10px;
+}
+
+button {
+    border-radius: 10px;
+    font: 22px Arial;
+    background-color: yellowgreen;
+    color: olive;
+}
+
+button:hover {
+    background-color: #04AA6D;
+    color: rgb(68, 68, 0);
+    transition: 0.5s;
+}
+
+button:focus {
+    outline-color: transparent;
+    outline-style: solid;
+    box-shadow: 0 0 0 4px burlywood;
+    transition: 0.5s;
+}
+
+button:active {
+    background-color: #04AA6D;
+    color: rgb(68, 68, 0);
+}
+
+label {
+    font: 22px Arial;
+    color: olive;
+    align-self: center;
+}
+
+input {
+    background-color: pink;
 }
 
 span {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    border: 1px solid pink;
-    /* min-height: 480px; */
-    /* align-self: center; */
     flex-wrap: wrap;
+    gap: 9px;
 }
 
 #bodyContainer {
     display: flex;
     justify-content: space-evenly;
-    /* align-items: stretch; */
     flex-wrap: wrap;
-    border: 1px solid green;
+    gap: 9px;
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 10px; /* Specified height */
+    background:rgb(88, 88, 88); /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 30px; /* Set a specific slider handle width */
+    height: 30px; /* Slider handle height */
+    background: yellowgreen; /* Green background */
+    cursor: progress; /* Cursor on hover */
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #04AA6D; /* Green background */
+    cursor: pointer; /* Cursor on hover */
 }
