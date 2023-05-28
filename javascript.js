@@ -32,19 +32,11 @@ slider.addEventListener("mousemove", () =>{
 })
 
 // Mouse hover event and change color
-container.addEventListener("mouseover", e => e.target.style.background = "black");
+let color = "black";
+container.addEventListener("mouseover", e => e.target.style.background = color);
 
-// Button to change the grid
-// const change = document.querySelector("#change");
-// change.addEventListener("click", () => {
-//     let newSquares = Number(prompt("Change the number of squares per side (up to 100):", 16));
-//     while (isNaN(newSquares) || newSquares > 100 || newSquares < 1) {
-//         newSquares = Number(prompt("Must be a number from 1 to 100!", 16));
-//     }
-//     squares = newSquares;
-//     clearGrid();
-//     generateGrid(squares);
-// });
+const inputColor = document.querySelector("#inputColor");
+inputColor.addEventListener("mouseleave", () => color = inputColor.value)
 
 function clearGrid() {
     container.innerHTML = "";
@@ -70,3 +62,17 @@ rainbow.addEventListener("click", () => {
     
     });
 
+
+    // NO LONGER NEEDED //
+
+// Button to change the grid
+// const change = document.querySelector("#change");
+// change.addEventListener("click", () => {
+//     let newSquares = Number(prompt("Change the number of squares per side (up to 100):", 16));
+//     while (isNaN(newSquares) || newSquares > 100 || newSquares < 1) {
+//         newSquares = Number(prompt("Must be a number from 1 to 100!", 16));
+//     }
+//     squares = newSquares;
+//     clearGrid();
+//     generateGrid(squares);
+// });

@@ -47,10 +47,19 @@ label {
     font: 22px Arial;
     color: olive;
     align-self: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-input {
-    background-color: pink;
+#inputColor {
+    background-color:  rgb(88, 88, 88);
+    border: none;
+    height: 50px;
+    width: 50px;
+    padding: 0px;
+    border-radius: 10px;
+    align-self: center;
 }
 
 span {
