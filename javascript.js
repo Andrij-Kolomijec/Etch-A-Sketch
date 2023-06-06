@@ -50,6 +50,8 @@ inputColor.addEventListener("mouseleave", () => {
         box.addEventListener("mouseover",() => color = inputColor.value)
     });
     isRainbowActive = false;
+    eraser.classList.remove("btn-on");
+    rainbowColor.classList.remove("btn-on");
 });
 
 const rainbowColor = document.querySelector("#rainbow");
@@ -59,6 +61,8 @@ function rainbowMode() {
         box.addEventListener("mouseover",() => color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`)
     });
     isRainbowActive = true;
+    eraser.classList.remove("btn-on");
+    rainbowColor.classList.add("btn-on");
 }
 rainbowColor.addEventListener("click", rainbowMode);
 
@@ -69,6 +73,8 @@ eraser.addEventListener("click", () => {
         box.addEventListener("mouseover",() => color = "white");
     });
     isRainbowActive = false;
+    rainbowColor.classList.remove("btn-on");
+    eraser.classList.add("btn-on")
 });
 
 function clearGrid() {
