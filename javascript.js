@@ -2,6 +2,10 @@
 const container = document.querySelector("#container");
 let squares = 16;
 let isRainbowActive = false;
+let isMouseDown = false;
+
+document.addEventListener("mousedown", () => isMouseDown = true);
+document.addEventListener("mouseup", () => isMouseDown = false);
 
 function generateGrid(number) {
     let boxSize = `${480 / squares}px`;
@@ -17,8 +21,8 @@ function generateGrid(number) {
         }
         container.appendChild(row);
         if (isRainbowActive) rainbowMode();
-    }
-}
+    };
+};
 
 generateGrid(squares);
 
@@ -41,7 +45,10 @@ slider.addEventListener("mousemove", () => {
 
 // Mouse hover event and change color
 let color = "black";
-container.addEventListener("mouseover", e => e.target.style.background = color);
+container.addEventListener("mouseover", (e) => {
+    if (isMouseDown) e.target.style.background = color
+});
+container.addEventListener("mousedown", (e) => e.target.style.background = color);
 
 const inputColor = document.querySelector("#inputColor");
 inputColor.addEventListener("mouseleave", () => {
