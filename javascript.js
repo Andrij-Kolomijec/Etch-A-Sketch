@@ -1,6 +1,7 @@
 // Create the grid
 const container = document.querySelector("#container");
 let squares = 16;
+let isRainbowActive = false;
 
 function generateGrid(number) {
     let boxSize = `${480 / squares}px`;
@@ -15,6 +16,7 @@ function generateGrid(number) {
             row.appendChild(box);
         }
         container.appendChild(row);
+        if (isRainbowActive) rainbowMode();
     }
 }
 
@@ -33,7 +35,7 @@ slider.addEventListener("mousemove", () => {
         generateGrid(squares);
         label.textContent = `${squares}x${squares} squares`;
         isSliderActive = false;
-        const box = document.querySelectorAll(".box");
+        // const box = document.querySelectorAll(".box");
     }
 });
 
@@ -46,23 +48,27 @@ inputColor.addEventListener("mouseleave", () => {
     let boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
         box.addEventListener("mouseover",() => color = inputColor.value)
-    })
+    });
+    isRainbowActive = false;
 });
 
 const rainbowColor = document.querySelector("#rainbow");
-rainbowColor.addEventListener("click", () => {
+function rainbowMode() {
     let boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
         box.addEventListener("mouseover",() => color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`)
-    })
-});
+    });
+    isRainbowActive = true;
+}
+rainbowColor.addEventListener("click", rainbowMode);
 
 const eraser = document.querySelector("#eraser");
 eraser.addEventListener("click", () => {
     let boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
-        box.addEventListener("mouseover",() => color = "white")
-    })
+        box.addEventListener("mouseover",() => color = "white");
+    });
+    isRainbowActive = false;
 });
 
 function clearGrid() {
