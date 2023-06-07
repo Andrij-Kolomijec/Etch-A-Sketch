@@ -4,6 +4,7 @@ let squares = 16;
 let isRainbowActive = false;
 let isGreyScaleActive = false;
 let isMouseDown = false;
+let isSliderActive = false;
 
 function generateGrid(number) {
     let boxSize = `${480 / squares}px`;
@@ -20,27 +21,28 @@ function generateGrid(number) {
         container.appendChild(row);
     if (isRainbowActive) rainbowMode();
     if (isGreyScaleActive) greyScaleMode();
-    let boxes = document.querySelectorAll(".box");
+    // let boxes = document.querySelectorAll(".box");
     };
-};
+}
 
 generateGrid(squares);
 
 
 //Change the grid size with slider
-let isSliderActive = false;
 const slider = document.querySelector(".slider");
 const label = document.querySelector("label");
-slider.addEventListener("mousedown", () => isSliderActive = true);
 slider.addEventListener("mousemove", () => {
-    if (isSliderActive) {
         squares = slider.value;
-        container.innerHTML = "";
-        generateGrid(squares);
+        
         label.textContent = `${squares}x${squares} squares`;
-        isSliderActive = false;
-    }
-});
+        
+})
+slider.addEventListener("mouseup", () => {
+    container.innerHTML = "";
+    generateGrid(squares);
+    isSliderActive = false;
+})
+
 
 
 // Mouse down + hover, mouse up events
