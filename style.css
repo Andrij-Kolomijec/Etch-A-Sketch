@@ -58,13 +58,24 @@ label {
 }
 
 #inputColor {
-    background-color:  rgb(88, 88, 88);
+    background-color:  rgb(234, 240, 179);
     border: none;
     height: 50px;
     width: 50px;
     padding: 0px;
     border-radius: 10px;
     align-self: center;
+    cursor: pointer;
+}
+
+#inputColor::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+#inputColor::-webkit-color-swatch {
+    border: none;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 span {

@@ -27,23 +27,18 @@ function generateGrid(number) {
 
 generateGrid(squares);
 
-
 //Change the grid size with slider
 const slider = document.querySelector(".slider");
 const label = document.querySelector("label");
 slider.addEventListener("mousemove", () => {
         squares = slider.value;
-        
         label.textContent = `${squares}x${squares} squares`;
-        
 })
 slider.addEventListener("mouseup", () => {
     container.innerHTML = "";
     generateGrid(squares);
     isSliderActive = false;
 })
-
-
 
 // Mouse down + hover, mouse up events
 document.addEventListener("mousedown", () => isMouseDown = true);
@@ -55,10 +50,9 @@ function mouseEvents () {
         if (isMouseDown) e.target.style.background = color //to color one needs to press and hold the mouse
         });
     container.addEventListener("mousedown", (e) => e.target.style.background = color); //ensures the square which was clicked first is also colored
-};
+}
 
 mouseEvents();
-
 
 //Change color with palette
 const inputColor = document.querySelector("#inputColor");
@@ -72,7 +66,7 @@ inputColor.addEventListener("mouseleave", () => {
     eraser.classList.remove("btn-on");
     rainbowColor.classList.remove("btn-on");
     greyScale.classList.remove("btn-on");
-});
+})
 
 //Rainbow mode
 const rainbowColor = document.querySelector("#rainbow");
@@ -86,7 +80,7 @@ function rainbowMode() {
     eraser.classList.remove("btn-on");
     greyScale.classList.remove("btn-on");
     rainbowColor.classList.add("btn-on");
-};
+}
 rainbowColor.addEventListener("click", rainbowMode);
 
 //Grey scale mode
@@ -102,12 +96,12 @@ function greyScaleMode() {
     eraser.classList.remove("btn-on");
     rainbowColor.classList.remove("btn-on");
     greyScale.classList.add("btn-on");
-};
+}
 function boxHover(event) {
     const box = event.target;
     color= `rgba(0, 0, 0, ${(10 * box.numPasses) / 100})`;
     box.numPasses++;
-};
+}
 greyScale.addEventListener("click", greyScaleMode);
 
 //Eraser
@@ -122,4 +116,4 @@ eraser.addEventListener("click", () => {
     rainbowColor.classList.remove("btn-on");
     greyScale.classList.remove("btn-on");
     eraser.classList.add("btn-on")
-});
+})
