@@ -78,6 +78,13 @@ label {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+#inputColor::-moz-color-swatch { /* for mozzila */
+    -moz-appearance: none;
+    border: none;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 span {
     display: flex;
     flex-direction: column;
@@ -119,6 +126,16 @@ span {
     height: 30px; /* Slider handle height */
     background: yellowgreen; /* Green background */
     cursor: progress; /* Cursor on hover */
+    border: 2px solid black;
+    border-radius: 50px;
+}
+
+.slider::-moz-range-thumb { /* for mozzila */
+    -moz-appearance: none;
+    width: 30px;
+    height: 30px;
+    background: yellowgreen;
+    cursor: progress;
     border: 2px solid black;
     border-radius: 50px;
 }
