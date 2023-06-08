@@ -16,11 +16,13 @@ function generateGrid(number) {
             box.style.width = boxSize;
             box.style.height = boxSize;
             row.appendChild(box);
-        };
+        }
         container.appendChild(row);
+    }
+    let boxes = document.querySelectorAll(".box");
+    boxes.forEach((box) => box.numPasses = 0);
     if (isGreyScaleActive) greyScaleMode();
     if (isRainbowActive) rainbowMode();
-    }
 }
 
 generateGrid(squares);
@@ -41,30 +43,34 @@ slider.addEventListener("click", () => {
     label.textContent = `${squares}x${squares} squares`;
     container.innerHTML = "";
     generateGrid(squares);
-    }        
-)
+})
 
 // Mouse down + hover, mouse up events
 document.addEventListener("mousedown", () => isMouseDown = true);
 document.addEventListener("mouseup", () => isMouseDown = false);
 
 let color = "black"; //initial color
-function mouseEvents () {
-    container.addEventListener("mouseover", (e) => {
-        if (isMouseDown) e.target.style.background = color //to color one needs to press and hold the mouse
-        })
-    container.addEventListener("mousedown", (e) => e.target.style.background = color); //ensures the square which was clicked first is also colored
-}
+container.addEventListener("mouseover", (e) => {
+    if (isMouseDown) {
+        e.target.style.background = color; //drawing is activated by pressing and holding the mouse
+    }
+})
+container.addEventListener("mousedown", (e) => e.target.style.background = color); //ensures the square which was clicked first is also colored
 
-mouseEvents();
+function resetNumPasses(event) {
+    const box = event.target;
+    if (isMouseDown) box.numPasses = 0;
+}
 
 //Change color with palette
 const inputColor = document.querySelector("#inputColor");
-inputColor.addEventListener("click", () => {
+inputColor.addEventListener("mouseleave", () => {
+    color = inputColor.value;
     let boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
-        box.removeEventListener("mouseover", boxHover);
-        box.addEventListener("mouseover",() => color = inputColor.value)
+        box.removeEventListener("mouseover", makeGreyScale);
+        box.removeEventListener("mouseover", makeRainbow);
+        box.addEventListener("mouseover",resetNumPasses)
     })
     isRainbowActive = false;
     isGreyScaleActive = false;
@@ -78,14 +84,20 @@ const rainbowColor = document.querySelector("#rainbow");
 function rainbowMode() {
     let boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
-        box.removeEventListener("mouseover", boxHover);
-        box.addEventListener("mouseover",() => color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`)
-    });
+        box.removeEventListener("mouseover", makeGreyScale);
+        box.removeEventListener("mouseover", resetNumPasses);
+        box.addEventListener("mouseover",makeRainbow);
+    })
     isGreyScaleActive = false;
     isRainbowActive = true;
     eraser.classList.remove("btn-on");
     greyScale.classList.remove("btn-on");
     rainbowColor.classList.add("btn-on");
+}
+function makeRainbow(event) {
+    const box = event.target;
+    color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+    if (isMouseDown) box.numPasses = 0;
 }
 rainbowColor.addEventListener("click", rainbowMode);
 
@@ -94,9 +106,10 @@ const greyScale = document.querySelector("#greyScale");
 function greyScaleMode() {
     let boxes = document.querySelectorAll(".box");
     boxes.forEach((box) => {
-        box.removeEventListener("mouseover", boxHover);
-        box.numPasses = 1;
-        box.addEventListener("mouseover", boxHover)
+        box.removeEventListener("mouseover", makeGreyScale);
+        box.removeEventListener("mouseover", makeRainbow);
+        box.removeEventListener("mouseover", resetNumPasses);
+        box.addEventListener("mouseover", makeGreyScale);
     })
     isGreyScaleActive = true;
     isRainbowActive = false;
@@ -104,20 +117,24 @@ function greyScaleMode() {
     rainbowColor.classList.remove("btn-on");
     greyScale.classList.add("btn-on");
 }
-function boxHover(event) {
-    if (isMouseDown) {
-        const box = event.target;
-        color= `rgba(0, 0, 0, ${(10 * box.numPasses) / 100})`;
-        box.numPasses++;
-    }
+function makeGreyScale(event) {
+    const box = event.target;
+    color = `rgba(0, 0, 0, ${(10 * (box.numPasses + 1)) / 100})`;
+    if (isMouseDown) box.numPasses++;
+    // console.log(box.numPasses);
 }
 greyScale.addEventListener("click", greyScaleMode);
 
 //Eraser
 const eraser = document.querySelector("#eraser");
 eraser.addEventListener("click", () => {
+    color = "white";
     let boxes = document.querySelectorAll(".box");
-    boxes.forEach((box) => box.addEventListener("mouseover",() => color = "white"));
+    boxes.forEach((box) => {
+        box.removeEventListener("mouseover", makeGreyScale);
+        box.removeEventListener("mouseover", makeRainbow);
+        box.addEventListener("mouseover",resetNumPasses)
+    })
     isGreyScaleActive = false;
     isRainbowActive = false;
     rainbowColor.classList.remove("btn-on");
